@@ -1,30 +1,31 @@
-set shell = creatobject ("wscript.shell")
+set shell = createobject ("wscript.shell")
 
-msgbox ""A little info - I mention right away that bot works best on discord when the intervals are 380-420 per sec. Additionally I will mention that if you want to stop the process go into task manager and close VBS Script microsoft process"
-spamtext = inputbox ("hello what text do you want to start flooding with?")
-spamtimes = inputbox ("How many times do I have to repeat this message?")
-spamgap = inputbox ("how to send messages fast")
-spamneed = inputbox ("Okey, so how much time do you need to enter the dialog?")
-If not isnumeric (spamneed & spamtimes & spamgap) then
-msgbox "Bad data. Turn on the application again and try again."
+msgbox "@Lithium PrivateStuff - version 2.0"
+
+strtext = inputbox ("Write down your message you like to spam")
+strtimes = inputbox ("How many times do you like to spam?")
+strspeed = inputbox ("How fast do you like to spam? (1000 = one per sec, 100 = 10 per sec etc)")
+strtimeneed = inputbox ("How many SECONDS do you need to get to your victims input box?")
+
+If not isnumeric (strtimes & strspeed & strtimeneed) then
+msgbox "You entered something not numerical. Please Try Again"
 wscript.quit
 End If
-spamneed2 = spamneed * 1000
+strtimeneed2 = strtimeneed * 1000
 do
-msgbox "You have " & spamneed & " seconds to enter the dialog box"
-wsript.sleep spamneed2
-shell.sendkeys ("Process activated" & "{enter}")
-for i=0 to spamtimes
-shell.sendkeys (spamtext & "{enter}")
-wscript.sleep spamgap
+msgbox "You have " & strtimeneed & " seconds to get to your input area where you are going to spam."
+wscript.sleep strtimeneed2
+for i=0 to strtimes
+shell.sendkeys (strtext & "{enter}")
+wscript.sleep strspeed
 Next
-shell.sendkeys ("SimpleSpammer dezactivated" & "{enter}")
-wscript.sleep spamgap * spamtimes / 10
-returnvalu=MsgBox ("Repeat?",36)
-Msgboxn "okay"
+wscript.sleep strspeed * strtimes / 10
+returnvalue=MsgBox ("Want to spam again with the same info?",36)
+If returnvalue=6 Then
+Msgbox "Ok Spambot Will Start Again"
 End If
 If returnvalue=7 Then
-msgbox "Bye"
+msgbox "Spambot Going To Sleep"
 wscript.quit
 End IF
 loop
